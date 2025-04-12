@@ -5,6 +5,7 @@ disp = pg.display.set_mode(size)
 
 run = True
 drawing = False
+ctrl_pressed = False
 start_x, start_y, w, h = 0, 0, 0, 0
 surf = pg.surface.Surface(size)
 surfs = []
@@ -35,7 +36,9 @@ while run:
             disp.fill("black")
             if len(surfs): disp.blit(surf, (0, 0))
             w, h = e.pos[0] - start_x, e.pos[1] - start_y
-        if e.type == pg.KEYUP and e.key == pg.K_z and len(surfs) > 0:
+        if (e.type == pg.KEYDOWN or e.type == pg.KEYUP) and e.key == pg.K_LCTRL:
+            ctrl_pressed = not ctrl_pressed
+        if e.type == pg.KEYUP and ctrl_pressed and e.key == pg.K_z and len(surfs) > 0:
             surfs.pop()
             print(surfs)
             rerender()
