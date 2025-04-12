@@ -14,7 +14,6 @@ def rerender():
     disp.fill("black")
     for s in surfs:
         disp.blit(s, (0, 0))
-        pg.display.flip()
     print(f"rerendered {len(surfs)} figs")
     pg.display.flip()
 
@@ -36,10 +35,6 @@ while run:
             disp.fill("black")
             if len(surfs): disp.blit(surfs[-1], (0, 0))
             w, h = e.pos[0] - start_x, e.pos[1] - start_y
-            # rect = pg.rect.Rect(start_x, start_y, e.pos[0] - start_x, e.pos[1] - start_y)
-            # pg.draw.rect(surf, "#2bb3fc", rect)
-            # disp.blit(surf, (0, 0))
-            # pg.display.flip()
         if e.type == pg.KEYUP and e.key == pg.K_z and len(surfs) > 0:
             surfs.pop()
             surf.fill("black")
