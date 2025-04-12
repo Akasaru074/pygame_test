@@ -43,8 +43,9 @@ while run:
             print(surfs)
             rerender()
     if drawing:
+        # surf.fill((0,0,0))
         rect = pg.rect.Rect(start_x, start_y, w, h)
-        pg.draw.rect(surf, "#2bb3fc", rect)
+        pg.draw.rect(surf, "#2bb3fc", rect, 5)
         disp.blit(surf, (0, 0))
         pg.display.flip()
 
