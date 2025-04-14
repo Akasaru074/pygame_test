@@ -11,14 +11,6 @@ surf = pg.surface.Surface(size)
 surfs = []
 rect = pg.rect.Rect(0,0,0,0)
 
-def rerender():
-    disp.fill("black")
-    for s in surfs:
-        disp.blit(s, (0, 0))
-    print(f"rerendered {len(surfs)} figs")
-    pg.display.flip()
-
-
 while run:
     for e in pg.event.get():
         if e.type == pg.QUIT:
@@ -30,7 +22,6 @@ while run:
             drawing = False
             surf.blit(disp, (0, 0))
             surfs.append(surf.copy())
-            print(surfs)
             start_x = start_y = w = h = 0
         if drawing and e.type == pg.MOUSEMOTION:
             disp.fill("black")
@@ -40,8 +31,9 @@ while run:
             ctrl_pressed = not ctrl_pressed
         if e.type == pg.KEYUP and ctrl_pressed and e.key == pg.K_z and len(surfs) > 0:
             surfs.pop()
-            print(surfs)
-            rerender()
+            disp.fill("black")
+            if len(surfs): disp.blit(surfs[-1], (0, 0))
+            pg.display.flip()
     if drawing:
         rect = pg.rect.Rect(start_x + (w if w < 0 else 0), start_y + (h if h < 0 else 0), abs(w), abs(h))
         pg.draw.rect(disp, "#2bb3fc", rect, 5)
