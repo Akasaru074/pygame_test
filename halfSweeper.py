@@ -35,8 +35,10 @@ while run:
             elif WIDTH - e.pos[1] < OFFSET // 2 or WIDTH - e.pos[0] < OFFSET // 2:
                 continue
 
-            i = e.pos[1] // (ACTUAL_WIDTH // N) - 1
-            j = e.pos[0] // (ACTUAL_WIDTH // N) - 1
+            i = (e.pos[1] - OFFSET // 2) // (ACTUAL_WIDTH // N)
+            j = (e.pos[0] - OFFSET // 2) // (ACTUAL_WIDTH // N)
+            print(e.pos)
+            print((i, j))
             if (i, j) in grid:
                 print("BOMB!")
             else:
