@@ -21,7 +21,6 @@ for i in range(N):
             grid.append((i, j))
         pg.draw.rect(disp, rect_color, rect, 1)
 
-print(grid)
 pg.display.flip()
 
 run = True
@@ -37,8 +36,6 @@ while run:
 
             i = (e.pos[1] - OFFSET // 2) // (ACTUAL_WIDTH // N)
             j = (e.pos[0] - OFFSET // 2) // (ACTUAL_WIDTH // N)
-            print(e.pos)
-            print((i, j))
             if (i, j) in grid:
                 print("BOMB!")
             else:
