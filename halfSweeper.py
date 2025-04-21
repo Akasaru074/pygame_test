@@ -12,6 +12,9 @@ assert WIDTH % N == 0
 ACTUAL_WIDTH = WIDTH - OFFSET
 
 grid = []
+click_grid = []
+font = pg.font.Font(pg.font.get_default_font(), 24)
+text = font.render("", 1, "#FFFFFF")
 for i in range(N):
     for j in range(N):
         rect_color = "red" if random() <= 0.1 else "white"
@@ -36,14 +39,21 @@ while run:
 
             i = (e.pos[1] - OFFSET // 2) // (ACTUAL_WIDTH // N)
             j = (e.pos[0] - OFFSET // 2) // (ACTUAL_WIDTH // N)
-            if (i, j) in grid:
-                print("BOMB!")
-            else:
+            if (i, j) not in grid and (i, j) not in click_grid:
                 s = 0
                 for a in [-1, 0, 1]:
                     for b in [-1, 0, 1]:
                         if (i + a, j + b) in grid:
                             s += 1
-                print(s)
+                text.fill("black")
+                text = font.render(f"{s}", 1, "#FFFFFF")
+                textRect = text.get_rect()
+                x = OFFSET // 2 + (ACTUAL_WIDTH // N) * j + (ACTUAL_WIDTH // N // 2)
+                y = OFFSET // 2 + (ACTUAL_WIDTH // N) * i + (ACTUAL_WIDTH // N // 2)
+                textRect.center = (x, y)
+                disp.blit(text, textRect)
+                pg.display.flip()
+                click_grid.append((i, j))
+                # print(s)
 
 pg.quit()
